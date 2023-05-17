@@ -15,8 +15,23 @@ CREATE TABLE estado(
 
 CREATE TABLE ciudad(
 	id_ciudad varchar(6) primary key,
+	nombre_ciu varchar (20),
 	id_estado_ciu varchar(7),
-	constraint fk_id_estado_ciu foreign key (id_estado_ciu) references estado(id_estado)
+	constraint fk_id_estado_ciu foreign key (id_estado_ciu) references 	estado(id_estado)
+);
+
+CREATE TABLE ubicacion_principal (
+
+	id_ubicacion_principal varchar(12) primary key,
+	id_Ciudad varchar (6),
+
+	constraint fk_id_ciudad_up_ foreign key (id_Ciudad) references 	ciudad 	(id_Ciudad)
+	
+);
+
+CREATE TABLE compañia(
+	id_compañia varchar(9) primary key,
+	nombre_com varchar(50)
 );
 
 CREATE TABLE equipo_vicepresidencia(
@@ -26,7 +41,7 @@ CREATE TABLE equipo_vicepresidencia(
 );
 
 CREATE TABLE equipo_area(
-	id_equipo_area varchar(12),
+	id_equipo_area varchar(12) primary key,
 	nombre_EA varchar (50),
 	id_eq_vic varchar(12),
 	constraint fk_id_eq_vic foreign key (id_eq_vic) references equipo_vicepresidencia(Id_Equipo_Vicepresidencia)
@@ -35,19 +50,20 @@ CREATE TABLE equipo_area(
 CREATE TABLE recursos_humanos(
 	id_RH varchar(12) primary key,
 	nombre_RH varchar(50),
-	apellido_RH varchar(50),
+	apellido_RH varchar(50)
 );
 
 CREATE TABLE Supervisor (
-	Id_Supervisor varchar(12) primary key,
+	id_Supervisor varchar(12) primary key,
 	Nombre_Sup varchar(50),
 	Apellido_Sup varchar(50),
-	id_RH_Sup varchar(50),
-	constraint fk_id_id_RH_Sup foreign key (id_RH_Sup) references recursos_humanos(id_RH),
+	id_RH_Sup varchar(12),
+
+	constraint fk_id_id_RH_Sup foreign key (id_RH_Sup) references 	recursos_humanos(id_RH)
 );
 
 CREATE TABLE Categoria (
-	Id_Categoria varchar(7) primary key,
+	id_Categoria varchar(7) primary key,
 	Descripcion_Cat varchar(50)
 );
 
@@ -59,28 +75,21 @@ CREATE TABLE empleado(
 	nombre_em varchar(50),
 	apellido_em varchar(50),
 	grupo_personal_em varchar(15),
-	id_supervisor_em varchar(11),
-	id_categoria_em varchar(7),
+	id_supervisor_em varchar(12),
+	categoria_informe_em varchar(20),
 	puesto_laboral_em varchar(40),
-	id_equipo_area varchar(20),
+	id_equipo_area_em varchar(12),
 	id_ubicacion_em varchar(12),
-	constraint fk_id_supervisor  foreign key (id_supervisor_em) references Supervisor(id_Supervisor),
-	constraint fk_id_categoria_em  foreign key (id_categoria_em) references categoria_informe (id_categoria),
-	constraint fk_id_equipo_area foreign key (id_equipo_area) references equipo_area(id_equipo_area),
-	constraint fk_id_ubicacion_em foreign key (id_ubicacion_em) references ubicacion_principal(id_ubicacion_em)
+
+	constraint fk_id_supervisor  foreign key (id_supervisor_em) references 	Supervisor(id_Supervisor),
+    constraint fk_id_equipo_areaa foreign key (id_equipo_area_em) references equipo_area(id_equipo_area),
+    constraint fk_id_ubicacion_em foreign key (id_ubicacion_em) references 	ubicacion_principal (id_ubicacion_principal)
+    
 );
 
-CREATE TABLE compañia(
-	id_compañia varchar(9) primary key,
-	nombre_com varchar(50)
-);
-
-CREATE TABLE UbicacionPrincipal (
-	Id_Ubicación_Principal varchar(12) primary key,
-	Nombre varchar(50)
-);
 
 CREATE TABLE Curso (
+
 	Id_Curso varchar(12) primary key,
 	Disponibilidad char(2),
 	FechaCreacion date,
@@ -88,23 +97,25 @@ CREATE TABLE Curso (
 	Duracion varchar(12),
 	Origen varchar(40),
 	Idioma varchar(20),
-	Contenido varchar(500),
+	Contenido varchar(5000),
 	Tipo_Cur varchar(30),
 	Costo varchar(30),
 	Id_Encargado varchar(12),
 	Id_Categoria_Cur varchar(7),
-	Responsable varchar(30),
 	Experto varchar(30),
 	Titulo_Cur varchar (100),
-	Descripción_Cur varchar (400),
+	Descripción_Cur varchar (5000),
 	proveedor_cur varchar(50),
 	proposito_formacion varchar(30),
 	area_conocimiento varchar(100),
-	constraint fk_Encargado foreign key (Id_Encargado) references empleado(Id_empleado),
-	constraint fk_Categoria_Cu foreign key (Id_Categoria_Cur) references Categoria(Id_Categoria)
+	Tipo_Contenido varchar(100),
+
+	
+	constraint fk_Categoria_Cu foreign key (Id_Categoria_Cur) references 	Categoria(Id_Categoria)
 );
 
 CREATE TABLE Empleado_Curso (
+
 	Id_Empleado_Curso varchar(12) primary key,
 	Id_Empleado_E_C varchar(12),
 	Id_Curso_E_C varchar(12),
@@ -116,7 +127,9 @@ CREATE TABLE Empleado_Curso (
 	id_user_actu varchar(12),
 	Fecha_actu date,
 	hora_actu date,
-	constraint fk_Empleado_E_C foreign key (Id_Empleado_E_C) references Empleado(Id_Empleado),
-	constraint fk_Curso_E_C foreign key (Id_Curso_E_C) references Curso(Id_Curso),
+
+	constraint fk_Empleado_E_C foreign key (Id_Empleado_E_C) references 
+	Empleado(Id_Empleado),
+	constraint fk_Curso_E_C foreign key (Id_Curso_E_C) references Curso(Id_Curso)
 );
 
