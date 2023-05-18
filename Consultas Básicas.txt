@@ -1,0 +1,85 @@
+SELECT COUNT(*) FROM Curso WHERE idioma = 'Ingles';
+SELECT COUNT(*) FROM Curso WHERE idioma = 'Español';
+SELECT COUNT(*) FROM Curso WHERE idioma = 'Holandes';
+SELECT COUNT(*) FROM Curso WHERE idioma = 'Frances';
+
+SELECT COUNT(*) FROM empleado e, empleado_curso ec WHERE  Estado LIKE 'Aprobado%' AND ec.id_empleado_e_c = e.id_empleado;
+
+SELECT COUNT(*) FROM empleado e, empleado_curso ec WHERE  Estado LIKE 'No Aprobado%' AND ec.id_empleado_e_c = e.id_empleado;
+
+SELECT AVG(ec.calificacion) FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p
+WHERE p.nombre_pais='colombia' AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado; 
+
+SELECT AVG(ec.calificacion) FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p
+WHERE p.nombre_pais='Costa Rica' AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado; 
+
+SELECT AVG(ec.calificacion) FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p
+WHERE p.nombre_pais='Honduras' AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado; 
+
+SELECT AVG(ec.calificacion) FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p
+WHERE p.nombre_pais='Panama' AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado;
+
+
+1. SELECT * FROM empleado LIMIT 10;
+
+2. SELECT * FROM curso LIMIT 10;
+
+3. SELECT c.id_curso, COUNT(*) AS cantidad_empleados
+FROM curso c
+JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
+JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado
+JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal
+JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad
+JOIN estado es ON es.id_estado = ci.id_estado_ciu
+JOIN pais p ON p.id_pais = es.id_pais_est
+WHERE p.nombre_pais = 'Panama'
+GROUP BY c.id_curso
+ORDER BY cantidad_empleados DESC
+LIMIT 5;
+
+4. SELECT c.id_curso, COUNT(*) AS cantidad_empleados
+FROM curso c
+JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
+JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado
+JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal
+JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad
+JOIN estado es ON es.id_estado = ci.id_estado_ciu
+JOIN pais p ON p.id_pais = es.id_pais_est
+WHERE p.nombre_pais = 'Honduras'
+GROUP BY c.id_curso
+ORDER BY cantidad_empleados DESC
+LIMIT 5;
+
+5.USE proyecto_final;
+SELECT c.id_curso, COUNT(*) AS cantidad_empleados
+FROM curso c
+JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
+JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado
+JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal
+JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad
+JOIN estado es ON es.id_estado = ci.id_estado_ciu
+JOIN pais p ON p.id_pais = es.id_pais_est
+WHERE p.nombre_pais = 'Colombia' AND c.Tipo_cur Like 'VIRTUAL'
+GROUP BY c.id_curso
+ORDER BY cantidad_empleados DESC
+LIMIT 10;
+
+6. USE proyecto_final;
+SELECT c.id_curso, COUNT(*) AS cantidad_empleados
+FROM curso c
+JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
+JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado
+JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal
+JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad
+JOIN estado es ON es.id_estado = ci.id_estado_ciu
+JOIN pais p ON p.id_pais = es.id_pais_est
+WHERE p.nombre_pais = 'Colombia' AND c.Tipo_cur Like 'PRES'
+GROUP BY c.id_curso
+ORDER BY cantidad_empleados DESC
+LIMIT 10;
+
+7. SELECT * FROM empleado_curso ec, empleado e WHERE ec.id_empleado_e_c = e.id_empleado AND ec.calificacion=100 LIMIT 10;
+
+
+
+
