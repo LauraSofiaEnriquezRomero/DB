@@ -1,27 +1,34 @@
-
 const express = require('express');
-const mysql = require('mysql');
-
 const app = express();
+const db = require('./db'); // Ruta correcta al archivo de conexión a la base de datos
 const port = 5500;
+app.use('/', express.static('index.html'));
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'yine2701',
-  database: 'proyecto_final'
+// Configuración de rutas y lógica del servidor
+
+// Ejemplo de ruta que realiza una consulta a la base de datos
+app.get('/usuarios', (req, res) => {
+  db.query('SELECT * FROM empleado LIMIT 10;', (err, result) => {
+    if (err) {
+      console.error('Error al obtener empleados: ', err);
+      res.status(500).send('Error del servidor');
+      return;
+    }
+    res.send(generarHTML(result));
+  });
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error('Error al conectar a la base de datos: ', err);
-    return;
+// Función para generar el HTML con los resultados de la consulta
+function generarHTML(resultados) {
+  let html = '<html><body><ul>';
+  for (let i = 0; i < resultados.length; i++) {
+    html += `<li>${resultados[i].nombre_em}</li>`;
   }
-  console.log('Conexión exitosa a la base de datos.');
-});
+  html += '</ul></body></html>';
+  return html;
+}
 
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);
 });
 
-app.use(express.static('Vista'));
