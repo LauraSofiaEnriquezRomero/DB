@@ -1,30 +1,25 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <title>Consulta a la base de datos</title>
 </head>
 <body>
-  
-  <h1>Usuarios:</h1>
-  <ul id="usuarios-list"></ul>
-  <button id="btnSolicitud">Hacer solicitud</button>
+  <h1>Resultados de la consulta</h1>
+  <ul id="results"></ul>
 
   <script>
-
-     document.getElementById('btnSolicitud').addEventListener('click', function() {
-      // Llamar a la función que realiza la solicitud a la ruta específica
-      hacerSolicitud();
-     });
-
-    function hacerSolicitud(){// Hacer la solicitud a la ruta /usuarios
-    fetch('/usuarios')
-      .then(response => response.text())
+    fetch('/').then(response => response.json())
       .then(data => {
-        // Insertar los resultados en el HTML
-        document.getElementById('usuarios-list').innerHTML = data;
+        const resultsElement = document.getElementById('results');
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = `${item.columna1}: ${item.columna2}`; // Ajusta las columnas según tu estructura de tabla
+          resultsElement.appendChild(li);
+        });
       })
-      .catch(error => console.error('Error al obtener los usuarios: ', error))};
-
+      .catch(error => console.log(error));
+      
   </script>
 </body>
 </html>

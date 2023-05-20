@@ -35,9 +35,12 @@ CREATE TABLE compañia(
 );
 
 CREATE TABLE equipo_vicepresidencia(
+
 	Id_Equipo_Vicepresidencia varchar(100) primary key,
 	nombre_EV varchar(100),
-	id_compañia varchar(100)
+	id_compañia_EV varchar(100),
+
+	constraint fk_id_compañia_ foreign key (id_compañia_EV) references compañia (id_compañia)
 );
 
 CREATE TABLE equipo_area(
@@ -70,8 +73,8 @@ CREATE TABLE Categoria (
 CREATE TABLE empleado(
 
 	id_empleado varchar(100) primary key,
-	num_identificacion varchar(100),
 	estado_laboral char(1),
+      num_identificacion varchar(100),
 	genero_em char(100),
 	nombre_em varchar(100),
 	apellido_em varchar(100),
