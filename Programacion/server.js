@@ -173,11 +173,130 @@ app.get('/cEspanol', (req, res) => {
   });
 });
 
+//Cantidad de cursos en idioma Holandes 
+app.get('/cHolandes', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM Curso WHERE idioma = "Holandes";', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
+//Cantidad de cursos en idioma Frances 
+app.get('/cFrances', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM Curso WHERE idioma = "Frances";', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
+//cursos aprobados por los empleados 
+app.get('/cAprobadosEm', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM empleado e, empleado_curso ec WHERE  Estado LIKE "Aprobado%" AND ec.id_empleado_e_c = e.id_empleado;',
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
+//cursos NO aprobados por los empleados 
+app.get('/cNoAprobadosEm', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM empleado e, empleado_curso ec WHERE  Estado LIKE "No Aprobado%" AND ec.id_empleado_e_c = e.id_empleado;',
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
+//Promedio de notas de los empleados de Colombia
+app.get('/PromNotasCol', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.jss
+  db.query('SELECT AVG(ec.calificacion) AS Cantidad FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p WHERE p.nombre_pais="colombia" AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado;',
+  
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
 
 
+//Promedio de notas de los empleados de Costa Rica.
+app.get('/PromNotasCR', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.jss
+  db.query('SELECT AVG(ec.calificacion) AS Cantidad  FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p WHERE p.nombre_pais="Costa Rica" AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado;' ,
+  
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
 
+//Promedio de notas de los empleados de honduras.
+app.get('/PromNotasH', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.jss
+  db.query('SELECT AVG(ec.calificacion) AS Cantidad  FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p WHERE p.nombre_pais="Honduras" AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado; ' ,
+  
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
 
-
+//Promedio de notas de los empleados de panama
+app.get('/PromNotasP', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.jss
+  db.query('SELECT AVG(ec.calificacion) AS Cantidad FROM empleado_curso ec,empleado e , ubicacion_principal u, ciudad c, estado es, pais p WHERE p.nombre_pais="Panama" AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=es.id_estado AND u.id_ciudad = c.id_ciudad AND e.id_ubicacion_em = u.id_ubicacion_principal AND ec.id_empleado_e_c=e.id_empleado; ' ,
+  
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);
 });

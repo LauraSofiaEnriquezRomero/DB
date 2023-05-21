@@ -111,6 +111,16 @@ tr:nth-child(even) {
       <button id="mejoresProm">Consultas mejores promedios</button>
       <button id="CurIngles">Consultas Cantidad cursos en inglés</button>
       <button id="CurEspanol">Consultas Cantidad cursos en español</button>
+      <button id="CurHolandes">Consultas Cantidad cursos en Holandes</button>
+      <button id="CurFrances">Consultas Cantidad cursos en Francés</button>
+      <button id="CurAprobadosEm">Consultas cursos aprobados por los empleados</button>
+      <button id="CurNoAprobadosEm">Consultas cursos no aprobados por los empleados</button>
+      <button id="EmPromNotasCol">Promedio de notas de los empleados de Colombia</button>
+      <button id="EmPromNotasCR">Promedio de notas de los empleados de Costa Rica</button>
+      <button id="EmPromNotasH">Promedio de notas de los empleados de Honduras</button>
+      <button id="EmPromNotasP">Promedio de notas de los empleados de Panamá</button>
+
+     
 
     </div>
   </div>
@@ -503,8 +513,6 @@ tr:nth-child(even) {
       });
     });
 
-
-
     $('#CurEspanol').click(() => {
       $.get('/cEspanol', (data) => {
         // Obtener una referencia a la tabla y el cuerpo de la tabla
@@ -537,6 +545,236 @@ tr:nth-child(even) {
         });
       });
     });
+
+    //Cursos en Holandes
+    $('#CurHolandes').click(() => {
+      $.get('/cHolandes', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos en Holandes');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
+    //Cursos en Holandes
+    $('#CurFrances').click(() => {
+      $.get('/cFrances', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos en Francés');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
+        //Cursos en Aprovados por los empleados
+        $('#CurAprobadosEm').click(() => {
+      $.get('/cAprobadosEm', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos aprobados por los empleados');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
+      //Cursos NO Aprovados por los empleados
+      $('#CurNoAprobadosEm').click(() => {
+      $.get('/cNoAprobadosEm', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos no aprobados por los empleados');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+      //Promedio de notas de los empleados de Colombia
+      $('#EmPromNotasCol').click(() => {
+      $.get('/PromNotasCol', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Promedio de las notas de los empleados de Colombia');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
+    
+      //Promedio de notas de los empleados de costa rica
+      $('#EmPromNotasCR').click(() => {
+      $.get('/PromNotasCR', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        const tablaAlt = $('#resultadosTabla');
+        const cuerpoTablaAlt = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        cuerpoTablaAlt.empty();
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Promedio de notas de los empleados de Costa Rica');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
+    
+      //Promedio de notas de los empleados de honduras
+      $('#EmPromNotasH').click(() => {
+      $.get('/PromNotasH', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Promedio de notas de los empleados de Honduras');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    }); 
+
+    
+      //Promedio de notas de los empleados de panama
+      $('#EmPromNotasP').click(() => {
+      $.get('/PromNotasP', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        
+        // Agregar nombre a las columnas
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Promedio de notas de los empleados de Panama');
+
+// Agregar las columnas a la fila
+        fila.append(tituloCI);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+          fila.append(cantidadCI);
+          cuerpoTabla.append(fila);
+        });
+      });
+    });
+
 
 
   </script>
