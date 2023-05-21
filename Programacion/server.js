@@ -8,11 +8,14 @@ const path = require('path')
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
-//Consulta 
 
-app.get('/consulta', (req, res) => {
+// AQUÍ EMPIEZAN LAS CONSULTAS DE TABLAS 
+
+//Consulta de 10 empleados 
+
+app.get('/empleados', (req, res) => {
   // Realiza la consulta a la base de datos utilizando el módulo db.js
-  db.query('SELECT * FROM recursos_humanos LIMIT 10;', (error, results) => {
+  db.query('SELECT * FROM empleado LIMIT 10;', (error, results) => {
     if (error) {
       console.error('Error al realizar la consulta:', error);
       res.status(500).json({ error: 'Error al realizar la consulta' });
@@ -22,6 +25,128 @@ app.get('/consulta', (req, res) => {
     }
   });
 });
+
+//Consulta de 10 cursos 
+
+app.get('/cursos', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT * FROM curso ORDER BY Id_Curso DESC LIMIT 10;', (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
+//Consulta cantidad de empleados de panamá que han realizado cursos 
+
+app.get('/cursosPanama', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT c.id_curso, COUNT(*) AS cantidad_empleados FROM curso c JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad JOIN estado es ON es.id_estado = ci.id_estado_ciu JOIN pais p ON p.id_pais = es.id_pais_est WHERE p.nombre_pais = "Panama" GROUP BY c.id_curso ORDER BY cantidad_empleados DESC LIMIT 5;', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+//Consulta cantidad de empleados de Honduras que han realizado cursos 
+
+app.get('/cursosHonduras', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT c.id_curso, COUNT(*) AS cantidad_empleados FROM curso c JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad JOIN estado es ON es.id_estado = ci.id_estado_ciu JOIN pais p ON p.id_pais = es.id_pais_est WHERE p.nombre_pais = "Honduras" GROUP BY c.id_curso ORDER BY cantidad_empleados DESC LIMIT 5;', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+//Consulta cantidad de empleados de Colombia que han realizado cursos virtuales
+
+app.get('/cursosColombiaV', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT c.id_curso, COUNT(*) AS cantidad_empleados FROM curso c JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad JOIN estado es ON es.id_estado = ci.id_estado_ciu JOIN pais p ON p.id_pais = es.id_pais_est WHERE p.nombre_pais = "Colombia" AND c.Tipo_cur Like "VIRTUAL" GROUP BY c.id_curso ORDER BY cantidad_empleados DESC LIMIT 10; ', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+//Consulta cantidad de empleados de Colombia que han realizado cursos presenciales
+
+app.get('/cursosColombiaP', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT c.id_curso, COUNT(*) AS cantidad_empleados FROM curso c JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso JOIN empleado e ON yo.id_empleado_e_c = e.id_empleado JOIN ubicacion_principal u ON e.id_ubicacion_em = u.id_ubicacion_principal JOIN ciudad ci ON ci.id_ciudad = u.id_ciudad JOIN estado es ON es.id_estado = ci.id_estado_ciu JOIN pais p ON p.id_pais = es.id_pais_est WHERE p.nombre_pais = "Colombia" AND c.Tipo_cur Like "PRES" GROUP BY c.id_curso ORDER BY cantidad_empleados DESC LIMIT 10; ', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+//Consulta mejores promedios de los cursos 
+
+app.get('/mejoresPromedios', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT * FROM empleado_curso ec, empleado e WHERE ec.id_empleado_e_c = e.id_empleado AND ec.calificacion=100 LIMIT 10;', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+//AQUI INICIAN LAS CONSULTAS DE UN SOLO DATO 
+
+//Cantidad de cursos en idioma inglés 
+app.get('/cIngles', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM Curso WHERE idioma = "Ingles";', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);

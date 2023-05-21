@@ -7,22 +7,60 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <button id="cargarBtn">Cargar resultados de la consulta</button>
+  <button id="empleado">Consultar empleados</button>
+  <button id="curso">Consultar cursos</button>
+  <button id="cursoPanama">Consultas Panamá</button>
+  <button id="cursoHonduras">Consultas Honduras</button>
+  <button id="cursoColV">Consultas Cursos Virtuales Col</button>
+  <button id="cursoColP">Consultas Cursos Presenciales Col</button>
+  <button id="mejoresProm">Consultas mejores promedios</button>
+
+  <button id="CurIngles">Consultas Cantidad cursos en inglés</button>
+
+  <table id="resultadosCortosTabla">
+    <thead>
+      <tr>
+
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  
 
   <table id="resultadosTabla">
     <thead>
       <tr>
+
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 
   <script>
-    $('#cargarBtn').click(() => {
-      $.get('/consulta', (data) => {
+    $('#empleado').click(() => {
+      $.get('/empleados', (data) => {
         // Obtener una referencia a la tabla y el cuerpo de la tabla
         const tabla = $('#resultadosTabla');
         const cuerpoTabla = tabla.find('tbody');
@@ -32,26 +70,343 @@
         // Agregar nombre a las columnas
 
         const fila = $('<tr>');
-        const id = $('<td>').text('ID');
+        const id = $('<td>').text('Id');
+        const est_lab = $('<td>').text('Estado laboral');
+        const identificacion = $('<td>').text('Identificacion');
+        const genero = $('<td>').text('Genero');
         const nombre = $('<td>').text('Nombre');
         const apellido = $('<td>').text('Apellido');
+        const grupo = $('<td>').text('Grupo personal');
+        const supervisor = $('<td>').text('Id supervisor');
+        const categoria = $('<td>').text('Categoria informe');
+        const puesto = $('<td>').text('Puesto laboral');
+        const area = $('<td>').text('Equipo de área');
+        const ubicacion = $('<td>').text('Id ubicacion');
 
 // Agregar las columnas a la fila
-        fila.append(id, nombre, apellido);
+        fila.append(id,est_lab, identificacion, genero, nombre, apellido, grupo, supervisor, categoria, puesto, area, ubicacion   );
         cuerpoTabla.append(fila);
 
         // Iterar sobre los resultados y agregar cada fila a la tabla
         data.forEach((item) => {
-          const fila = $('<tr>');
-          const columnaID = $('<td>').text(item.id_RH);
-          const columnaNombre = $('<td>').text(item.nombre_RH);
-          const columnaEmail = $('<td>').text(item.apellido_RH);
 
-          fila.append(columnaID, columnaNombre, columnaEmail);
+          const fila = $('<tr>');
+          const columnaID = $('<td>').text(item.id_empleado);
+          const columnaEst = $('<td>').text(item.estado_laboral);
+          const columnaIdenti = $('<td>').text(item.num_identificacion);
+          const columnaGen = $('<td>').text(item.genero_em);
+          const columnaNombre = $('<td>').text(item.nombre_em);
+          const columnaApellido = $('<td>').text(item.apellido_em);
+          const columnaGrupo = $('<td>').text(item.grupo_personal_em);
+          const columnaSupervisor = $('<td>').text(item.id_supervisor_em);
+          const columnaCategoria = $('<td>').text(item.categoria_informe_em);
+          const columnaPuesto = $('<td>').text(item.puesto_laboral_em);
+          const columnaArea = $('<td>').text(item.id_equipo_area_em);
+          const columnaUbicacion = $('<td>').text(item.id_ubicacion_em);
+
+          fila.append(columnaID, columnaEst, columnaIdenti, columnaGen, columnaNombre, columnaApellido, columnaGrupo, columnaSupervisor, columnaCategoria, columnaPuesto, columnaArea, columnaUbicacion);
           cuerpoTabla.append(fila);
+
         });
       });
     });
+
+
+    $('#curso').click(() => {
+      $.get('/cursos', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const id = $('<td>').text('Id');
+        const disponibilidad = $('<td>').text('Disponibilidad');
+        const fechaC = $('<td>').text('Fecha creación');
+        const fechaP = $('<td>').text('Fecha publicación');
+        const duracion = $('<td>').text('Duracion');
+        const origen = $('<td>').text('Origen');
+        const idioma = $('<td>').text('Idioma');
+        const contenido = $('<td>').text('Contenido');
+        const tipo = $('<td>').text('Tipo');
+        const costo = $('<td>').text('Costo');
+        const encargado = $('<td>').text('Id encargado');
+        const categoriaC = $('<td>').text('Id categroia');
+        const experto = $('<td>').text('Experto');
+        const titulo = $('<td>').text('Titulo');
+        const descripcion = $('<td>').text('Descripción');
+        const proveedor = $('<td>').text('Proveedor');
+        const Proposito = $('<td>').text('Proposito Formacion');
+        const areaCon = $('<td>').text('Área conocimiento');
+        const tipoCont = $('<td>').text('Tipo Contenido');
+
+// Agregar las columnas a la fila
+
+        fila.append(id,disponibilidad, fechaC, fechaP, duracion, origen, idioma,contenido, tipo, costo,
+        encargado, categoriaC, experto, titulo,  descripcion, proveedor, Proposito, areaCon, tipoCont);
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDC = $('<td>').text(item.Id_Curso);
+          const columnaDisp = $('<td>').text(item.Disponibilidad);
+          const columnaFechaC = $('<td>').text(item.FechaCreacion);
+          const columnaFechaPub = $('<td>').text(item.FechaPublicacion);
+          const columnaDuracion = $('<td>').text(item.Duracion);
+          const columnaOrigen = $('<td>').text(item.Origen);
+          const columnaIdioma = $('<td>').text(item.Idioma);
+          const columnaContenido = $('<td>').text(item.Contenido);
+          const columnaTipoCur = $('<td>').text(item.Tipo_Cur);
+          const columnaCosto = $('<td>').text(item.Costo);
+          const columnaEncargado = $('<td>').text(item.Id_Encargado);
+          const columnaCategoria = $('<td>').text(item.Id_Categoria_Cur);
+          const columnaExperto = $('<td>').text(item.Experto);
+          const columnaTitulo = $('<td>').text(item.Id_Titulo_Cur);
+          const columnaDescripcion = $('<td>').text(item.Descripción_Cur);
+          const columnaProveedor = $('<td>').text(item.proveedor_cur);
+          const columnaProposito = $('<td>').text(item.proposito_formacion);
+          const columnaAreaC = $('<td>').text(item.area_conocimiento);
+          const columnaTipo = $('<td>').text(item.Tipo_Contenido);
+          
+          fila.append(columnaIDC,columnaDisp, columnaFechaC, columnaFechaPub,columnaDuracion,
+          columnaOrigen, columnaIdioma, columnaContenido, columnaTipoCur, columnaCosto, columnaEncargado,
+          columnaCategoria, columnaExperto, columnaTitulo, columnaDescripcion,  columnaProveedor, columnaProposito,
+          columnaAreaC, columnaTipo);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+    $('#cursoPanama').click(() => {
+      $.get('/cursosPanama', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const idCurso = $('<td>').text('Id curso');
+        const cantidadEmple = $('<td>').text('Cantidad de empleados');
+
+// Agregar las columnas a la fila
+
+        fila.append(idCurso , cantidadEmple);
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDCur = $('<td>').text(item.id_curso);
+          const columnaCantidadEm = $('<td>').text(item.cantidad_empleados);
+
+          fila.append(columnaIDCur, columnaCantidadEm  );
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+    $('#cursoHonduras').click(() => {
+      $.get('/cursosHonduras', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const idCursoH = $('<td>').text('Id curso');
+        const cantidadEmpleH = $('<td>').text('Cantidad de empleados');
+
+// Agregar las columnas a la fila
+
+        fila.append(idCursoH , cantidadEmpleH);
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDCurH = $('<td>').text(item.id_curso);
+          const columnaCantidadEmH = $('<td>').text(item.cantidad_empleados);
+
+          fila.append(columnaIDCurH, columnaCantidadEmH);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+    $('#cursoColV').click(() => {
+
+      $.get('/cursosColombiaV', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const idCursoCV = $('<td>').text('Id curso');
+        const cantidadEmpleCV = $('<td>').text('Cantidad de empleados');
+
+// Agregar las columnas a la fila
+
+        fila.append(idCursoCV , cantidadEmpleCV );
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDCurCV = $('<td>').text(item.id_curso);
+          const columnaCantidadCV = $('<td>').text(item.cantidad_empleados);
+
+          fila.append(columnaIDCurCV, columnaCantidadCV);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+    $('#cursoColP').click(() => {
+
+      $.get('/cursosColombiaP', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const idCursoCP = $('<td>').text('Id curso');
+        const cantidadEmpleCP = $('<td>').text('Cantidad de empleados');
+
+// Agregar las columnas a la fila
+
+        fila.append(idCursoCP , cantidadEmpleCP );
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDCurCP = $('<td>').text(item.id_curso);
+          const columnaCantidadCP = $('<td>').text(item.cantidad_empleados);
+
+          fila.append(columnaIDCurCP, columnaCantidadCP);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+     $('#mejoresProm').click(() => {
+
+      $.get('/mejoresPromedios', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const idEm = $('<td>').text('Id empleado');
+        const nomEm = $('<td>').text('Nombre empleado');
+        const ApellidoEm = $('<td>').text('Apellido empleado');
+        const IdCur = $('<td>').text('Id curso');
+        const Cal = $('<td>').text('Calificacion');
+        
+
+// Agregar las columnas a la fila
+
+        fila.append(idEm, nomEm, ApellidoEm,IdCur,Cal );
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaIDEm = $('<td>').text(item.Id_Empleado_E_C);
+          const columnaNomEm = $('<td>').text(item.nombre_em);
+          const columnaApellEm = $('<td>').text(item.apellido_em);
+          const columnaIdCurso = $('<td>').text(item.Id_Curso_E_C);
+          const columnaCal = $('<td>').text(item.calificacion);
+          
+
+          fila.append(columnaIDEm, columnaNomEm, columnaApellEm,columnaIdCurso,columnaCal);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
+
+    //Vista para las consultas Cortas
+
+    $('#CurIngles').click(() => {
+      $.get('/cIngles', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos en inglés');
+
+// Agregar las columnas a la fila
+
+        fila.append(tituloCI);
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+
+          fila.append(cantidadCI);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
   </script>
 </body>
 </html>

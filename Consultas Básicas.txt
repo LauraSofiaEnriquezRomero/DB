@@ -22,7 +22,7 @@ WHERE p.nombre_pais='Panama' AND es.id_pais_est = p.id_pais AND c.id_estado_ciu=
 
 1. SELECT * FROM empleado LIMIT 10;
 
-2. SELECT * FROM curso LIMIT 10;
+2. SELECT * FROM curso ORDER BY Id_Curso DESC LIMIT 10;
 
 3. SELECT c.id_curso, COUNT(*) AS cantidad_empleados
 FROM curso c
@@ -50,7 +50,7 @@ GROUP BY c.id_curso
 ORDER BY cantidad_empleados DESC
 LIMIT 5;
 
-5.USE proyecto_final;
+5.
 SELECT c.id_curso, COUNT(*) AS cantidad_empleados
 FROM curso c
 JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
@@ -64,7 +64,7 @@ GROUP BY c.id_curso
 ORDER BY cantidad_empleados DESC
 LIMIT 10;
 
-6. USE proyecto_final;
+6. 
 SELECT c.id_curso, COUNT(*) AS cantidad_empleados
 FROM curso c
 JOIN empleado_curso yo ON yo.id_curso_e_c = c.id_curso
