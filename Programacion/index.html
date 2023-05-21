@@ -3,18 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Consulta de base de datos</title>
+
+  <title>Consulta a la base de datos</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Estilos con CSS-->
   <style>
+
     body{
       background-color: #F1F1E6;
     }
     table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+    }
 
 td, th {
   border: 1px solid #dddddd;
@@ -41,7 +45,7 @@ tr:nth-child(even) {
 }
 
 .dropbtn {
-    background-color: #400000;
+    background-color: #3d7276;
     color: white; 
     padding: 16px;
     font-size: 16px;
@@ -49,11 +53,11 @@ tr:nth-child(even) {
     cursor: pointer;
     margin-top: 25px;
     margin-left: 10px;
-    width: 250px;
+    width: 350px;
   }
 
   .dropbtn:hover, .dropbtn:focus {
-    background-color: #400000;
+    background-color: #526c6e;
   }
 
   .dropdown {
@@ -62,10 +66,11 @@ tr:nth-child(even) {
   }
 
   .dropdown-content {
+
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    width: 250px;
+    width: 350px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     margin-left: 10px;
@@ -73,26 +78,31 @@ tr:nth-child(even) {
   }
 
   .dropdown-content button {
+    
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     border: none;
-    text-align: center;
-    width: 250px ;
+    text-align: left;
+    width: 350px ;
   }
 
   .dropdown-content button:hover {background-color: #ddd;}
 
   .show {display:block;}
-    </style>
+
+  </style>
+
+  <!-- Estilos con CSS-->
+  
 </head>
 
 <body>
   
   
   <div class = "Header">
-    <h2> Bienvenidos al consultorio Naranja </h2>
+    <h2> Bienvenidos al consultario Naranja </h2>
 
   </div>
 
@@ -101,105 +111,61 @@ tr:nth-child(even) {
      <button onclick="myFunction()" class="dropbtn">Elije tu consulta</button>
   
     <div id="myDropdown" class="dropdown-content">
-      <button id="Consulta1">Consulta 1 </button>
-      <button id="empleado">Consultar empleados</button>
-      <button id="curso">Consultar cursos</button>
-      <button id="cursoPanama">Consultas Panamá</button>
-      <button id="cursoHonduras">Consultas Honduras</button>
-      <button id="cursoColV">Consultas Cursos Virtuales Col</button>
-      <button id="cursoColP">Consultas Cursos Presenciales Col</button>
-      <button id="mejoresProm">Consultas mejores promedios</button>
-      <button id="CurIngles">Consultas Cantidad cursos en inglés</button>
-      <button id="CurEspanol">Consultas Cantidad cursos en español</button>
-      <button id="CurHolandes">Consultas Cantidad cursos en Holandes</button>
-      <button id="CurFrances">Consultas Cantidad cursos en Francés</button>
-      <button id="CurAprobadosEm">Consultas cursos aprobados por los empleados</button>
-      <button id="CurNoAprobadosEm">Consultas cursos no aprobados por los empleados</button>
+
+      <button id="empleado">Empleados</button>
+      <button id="curso">Cursos</button>
+      <button id="cursoPanama"> Cursos que tienen mayor cantidad de empleados de Panamá </button>
+      <button id="cursoHonduras"> Cursos que tienen mayor cantidad de empleados de Honduras </button>
+      <button id="cursoColV"> Cursos virtuales que tienen mayor cantidad de empleados de Colombia </button>
+      <button id="cursoColP"> Cursos presenciales que tienen mayor cantidad de empleados de Colombia </button>
+      <button id="mejoresProm">Mejores promedios</button>
+      <button id="CurIngles">Cantidad de cursos en inglés</button>
+      <button id="CurEspanol">Cantidad de cursos en español</button>
+      <button id="CurHolandes">Cantidad de cursos en Holandés</button>
+      <button id="CurFrances">Cantidad de cursos en Francés</button>
+      <button id="CurAprobadosEm">Cantidad de cursos aprobados por los empleados</button>
+      <button id="CurNoAprobadosEm">Cantidad de cursos no aprobados por los empleados</button>
       <button id="EmPromNotasCol">Promedio de notas de los empleados de Colombia</button>
       <button id="EmPromNotasCR">Promedio de notas de los empleados de Costa Rica</button>
       <button id="EmPromNotasH">Promedio de notas de los empleados de Honduras</button>
       <button id="EmPromNotasP">Promedio de notas de los empleados de Panamá</button>
 
-     
-
     </div>
   </div>
 
+  <h1>
+
+  </h1>
+
+  <div class="Tabla 1">
   <table id="resultadosCortosTabla">
     <thead>
       <tr>
-
-        <th></th>
-        <th></th>
 
       </tr>
     </thead>
     <tbody></tbody>
   </table>
 
-  
+  <h1>
+
+  </h1>
+
+  <div class="Tabla 2">
   <center>
     <table id="resultadosTabla">
       <thead>
         <tr>
-  
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
   
         </tr>
       </thead>
       <tbody></tbody>
     </table>  
 </center>
+</div>
 
   <script>
-    $('#Consulta1').click(() => {
-      $.get('/consulta', (data) => {
-        // Obtener una referencia a la tabla y el cuerpo de la tabla
-        const tabla = $('#resultadosTabla');
-        const cuerpoTabla = tabla.find('tbody');
-
-        // Limpiar la tabla antes de agregar los nuevos datos
-        cuerpoTabla.empty();
-        // Agregar nombre a las columnas
-
-        const fila = $('<tr>');
-        const id_ciudad = $('<td>').text('id_ciudad');
-        const nombre_ciu = $('<td>').text('nombre_ciu');
-        const id_estado_ciu = $('<td>').text('id_estado_ciu');
-
-// Agregar las columnas a la fila
-        fila.append(id_ciudad, nombre_ciu, id_estado_ciu);
-        cuerpoTabla.append(fila);
-
-        // Iterar sobre los resultados y agregar cada fila a la tabla
-        data.forEach((item) => {
-          const fila = $('<tr>');
-          const columnaID = $('<td>').text(item.id_ciudad);
-          const columnaNombre = $('<td>').text(item.nombre_ciu);
-          const columnaEmail = $('<td>').text(item.id_estado_ciu);
-
-          fila.append(columnaID, columnaNombre, columnaEmail);
-          cuerpoTabla.append(fila);
-        });
-      });
-    });
+    
     function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -217,6 +183,60 @@ tr:nth-child(even) {
       }
     }
   }
+
+  // AQUI EMPIEZAN CONSULTAS DE TABLAS
+
+  $('#empleado').click(() => {
+      $.get('/empleados', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const id = $('<td>').text('Id');
+        const est_lab = $('<td>').text('Estado laboral');
+        const identificacion = $('<td>').text('Identificacion');
+        const genero = $('<td>').text('Genero');
+        const nombre = $('<td>').text('Nombre');
+        const apellido = $('<td>').text('Apellido');
+        const grupo = $('<td>').text('Grupo personal');
+        const supervisor = $('<td>').text('Id supervisor');
+        const categoria = $('<td>').text('Categoria informe');
+        const puesto = $('<td>').text('Puesto laboral');
+        const area = $('<td>').text('Equipo de área');
+        const ubicacion = $('<td>').text('Id ubicacion');
+
+// Agregar las columnas a la fila
+        fila.append(id,est_lab, identificacion, genero, nombre, apellido, grupo, supervisor, categoria, puesto, area, ubicacion   );
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const columnaID = $('<td>').text(item.id_empleado);
+          const columnaEst = $('<td>').text(item.estado_laboral);
+          const columnaIdenti = $('<td>').text(item.num_identificacion);
+          const columnaGen = $('<td>').text(item.genero_em);
+          const columnaNombre = $('<td>').text(item.nombre_em);
+          const columnaApellido = $('<td>').text(item.apellido_em);
+          const columnaGrupo = $('<td>').text(item.grupo_personal_em);
+          const columnaSupervisor = $('<td>').text(item.id_supervisor_em);
+          const columnaCategoria = $('<td>').text(item.categoria_informe_em);
+          const columnaPuesto = $('<td>').text(item.puesto_laboral_em);
+          const columnaArea = $('<td>').text(item.id_equipo_area_em);
+          const columnaUbicacion = $('<td>').text(item.id_ubicacion_em);
+
+          fila.append(columnaID, columnaEst, columnaIdenti, columnaGen, columnaNombre, columnaApellido, columnaGrupo, columnaSupervisor, columnaCategoria, columnaPuesto, columnaArea, columnaUbicacion);
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
 
     $('#curso').click(() => {
       $.get('/cursos', (data) => {
@@ -774,8 +794,6 @@ tr:nth-child(even) {
         });
       });
     });
-
-
 
   </script>
 </body>
