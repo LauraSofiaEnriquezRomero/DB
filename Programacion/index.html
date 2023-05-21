@@ -5,17 +5,115 @@
 <head>
   <title>Consulta de base de datos</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-  <button id="empleado">Consultar empleados</button>
-  <button id="curso">Consultar cursos</button>
-  <button id="cursoPanama">Consultas Panamá</button>
-  <button id="cursoHonduras">Consultas Honduras</button>
-  <button id="cursoColV">Consultas Cursos Virtuales Col</button>
-  <button id="cursoColP">Consultas Cursos Presenciales Col</button>
-  <button id="mejoresProm">Consultas mejores promedios</button>
 
-  <button id="CurIngles">Consultas Cantidad cursos en inglés</button>
+  <style>
+    body{
+      background-color: #F1F1E6;
+    }
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    .Header
+{
+    background-color: #F27405;
+    color: white;
+    text-align: center;
+    width: auto;   
+    height: 100px ;
+}
+
+.Header h2{
+    margin: 0;
+    padding: 25px;
+    font-size: 36px;
+}
+
+.dropbtn {
+    background-color: #400000;
+    color: white; 
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-left: 10px;
+    width: 250px;
+  }
+
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #400000;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left: 10px;
+
+  }
+
+  .dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border: none;
+    text-align: center;
+    width: 250px ;
+  }
+
+  .dropdown-content button:hover {background-color: #ddd;}
+
+  .show {display:block;}
+    </style>
+</head>
+
+<body>
+  
+  
+  <div class = "Header">
+    <h2> Bienvenidos al consultorio Naranja </h2>
+
+  </div>
+
+<div class="dropdown">
+
+     <button onclick="myFunction()" class="dropbtn">Elije tu consulta</button>
+  
+    <div id="myDropdown" class="dropdown-content">
+      <button id="Consulta1">Consulta 1 </button>
+      <button id="empleado">Consultar empleados</button>
+      <button id="curso">Consultar cursos</button>
+      <button id="cursoPanama">Consultas Panamá</button>
+      <button id="cursoHonduras">Consultas Honduras</button>
+      <button id="cursoColV">Consultas Cursos Virtuales Col</button>
+      <button id="cursoColP">Consultas Cursos Presenciales Col</button>
+      <button id="mejoresProm">Consultas mejores promedios</button>
+      <button id="CurIngles">Consultas Cantidad cursos en inglés</button>
+      <button id="CurEspanol">Consultas Cantidad cursos en español</button>
+
+    </div>
+  </div>
 
   <table id="resultadosCortosTabla">
     <thead>
@@ -28,39 +126,41 @@
     </thead>
     <tbody></tbody>
   </table>
+
   
-
-  <table id="resultadosTabla">
-    <thead>
-      <tr>
-
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <center>
+    <table id="resultadosTabla">
+      <thead>
+        <tr>
+  
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+  
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>  
+</center>
 
   <script>
-    $('#empleado').click(() => {
-      $.get('/empleados', (data) => {
+    $('#Consulta1').click(() => {
+      $.get('/consulta', (data) => {
         // Obtener una referencia a la tabla y el cuerpo de la tabla
         const tabla = $('#resultadosTabla');
         const cuerpoTabla = tabla.find('tbody');
@@ -70,47 +170,43 @@
         // Agregar nombre a las columnas
 
         const fila = $('<tr>');
-        const id = $('<td>').text('Id');
-        const est_lab = $('<td>').text('Estado laboral');
-        const identificacion = $('<td>').text('Identificacion');
-        const genero = $('<td>').text('Genero');
-        const nombre = $('<td>').text('Nombre');
-        const apellido = $('<td>').text('Apellido');
-        const grupo = $('<td>').text('Grupo personal');
-        const supervisor = $('<td>').text('Id supervisor');
-        const categoria = $('<td>').text('Categoria informe');
-        const puesto = $('<td>').text('Puesto laboral');
-        const area = $('<td>').text('Equipo de área');
-        const ubicacion = $('<td>').text('Id ubicacion');
+        const id_ciudad = $('<td>').text('id_ciudad');
+        const nombre_ciu = $('<td>').text('nombre_ciu');
+        const id_estado_ciu = $('<td>').text('id_estado_ciu');
 
 // Agregar las columnas a la fila
-        fila.append(id,est_lab, identificacion, genero, nombre, apellido, grupo, supervisor, categoria, puesto, area, ubicacion   );
+        fila.append(id_ciudad, nombre_ciu, id_estado_ciu);
         cuerpoTabla.append(fila);
 
         // Iterar sobre los resultados y agregar cada fila a la tabla
         data.forEach((item) => {
-
           const fila = $('<tr>');
-          const columnaID = $('<td>').text(item.id_empleado);
-          const columnaEst = $('<td>').text(item.estado_laboral);
-          const columnaIdenti = $('<td>').text(item.num_identificacion);
-          const columnaGen = $('<td>').text(item.genero_em);
-          const columnaNombre = $('<td>').text(item.nombre_em);
-          const columnaApellido = $('<td>').text(item.apellido_em);
-          const columnaGrupo = $('<td>').text(item.grupo_personal_em);
-          const columnaSupervisor = $('<td>').text(item.id_supervisor_em);
-          const columnaCategoria = $('<td>').text(item.categoria_informe_em);
-          const columnaPuesto = $('<td>').text(item.puesto_laboral_em);
-          const columnaArea = $('<td>').text(item.id_equipo_area_em);
-          const columnaUbicacion = $('<td>').text(item.id_ubicacion_em);
+          const columnaID = $('<td>').text(item.id_ciudad);
+          const columnaNombre = $('<td>').text(item.nombre_ciu);
+          const columnaEmail = $('<td>').text(item.id_estado_ciu);
 
-          fila.append(columnaID, columnaEst, columnaIdenti, columnaGen, columnaNombre, columnaApellido, columnaGrupo, columnaSupervisor, columnaCategoria, columnaPuesto, columnaArea, columnaUbicacion);
+          fila.append(columnaID, columnaNombre, columnaEmail);
           cuerpoTabla.append(fila);
-
         });
       });
     });
-
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
 
     $('#curso').click(() => {
       $.get('/cursos', (data) => {
@@ -406,6 +502,42 @@
         });
       });
     });
+
+
+
+    $('#CurEspanol').click(() => {
+      $.get('/cEspanol', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosCortosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const tituloCI = $('<td>').text('Cantidad de cursos en español');
+
+// Agregar las columnas a la fila
+
+        fila.append(tituloCI);
+
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+
+          const fila = $('<tr>');
+          const cantidadCI = $('<td>').text(item.Cantidad);
+
+          fila.append(cantidadCI);
+
+          cuerpoTabla.append(fila);
+
+        });
+      });
+    });
+
 
   </script>
 </body>

@@ -13,6 +13,19 @@ app.get('/', (req, res) => {
 
 //Consulta de 10 empleados 
 
+app.get('/consulta', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT * FROM ciudad LIMIT 10;', (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+  });
+});
+
 app.get('/empleados', (req, res) => {
   // Realiza la consulta a la base de datos utilizando el módulo db.js
   db.query('SELECT * FROM empleado LIMIT 10;', (error, results) => {
@@ -143,6 +156,23 @@ app.get('/cIngles', (req, res) => {
 
   });
 });
+
+//Cantidad de cursos en idioma español 
+app.get('/cEspanol', (req, res) => {
+  // Realiza la consulta a la base de datos utilizando el módulo db.js
+  db.query('SELECT COUNT(*) AS Cantidad FROM Curso WHERE idioma = "Español";', 
+  (error, results) => {
+    if (error) {
+      console.error('Error al realizar la consulta:', error);
+      res.status(500).json({ error: 'Error al realizar la consulta' });
+    } else {
+      // Devuelve los resultados como respuesta JSON
+      res.json(results);
+    }
+
+  });
+});
+
 
 
 
