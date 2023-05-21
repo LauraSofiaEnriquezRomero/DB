@@ -1,25 +1,57 @@
 <!-- index.html -->
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Consulta a la base de datos</title>
+  <title>Consulta de base de datos</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <h1>Resultados de la consulta</h1>
-  <ul id="results"></ul>
+  <button id="cargarBtn">Cargar resultados de la consulta</button>
+
+  <table id="resultadosTabla">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
   <script>
-    fetch('/').then(response => response.json())
-      .then(data => {
-        const resultsElement = document.getElementById('results');
-        data.forEach(item => {
-          const li = document.createElement('li');
-          li.textContent = `${item.columna1}: ${item.columna2}`; // Ajusta las columnas según tu estructura de tabla
-          resultsElement.appendChild(li);
+    $('#cargarBtn').click(() => {
+      $.get('/consulta', (data) => {
+        // Obtener una referencia a la tabla y el cuerpo de la tabla
+        const tabla = $('#resultadosTabla');
+        const cuerpoTabla = tabla.find('tbody');
+
+        // Limpiar la tabla antes de agregar los nuevos datos
+        cuerpoTabla.empty();
+        // Agregar nombre a las columnas
+
+        const fila = $('<tr>');
+        const id = $('<td>').text('ID');
+        const nombre = $('<td>').text('Nombre');
+        const apellido = $('<td>').text('Apellido');
+
+// Agregar las columnas a la fila
+        fila.append(id, nombre, apellido);
+        cuerpoTabla.append(fila);
+
+        // Iterar sobre los resultados y agregar cada fila a la tabla
+        data.forEach((item) => {
+          const fila = $('<tr>');
+          const columnaID = $('<td>').text(item.id_RH);
+          const columnaNombre = $('<td>').text(item.nombre_RH);
+          const columnaEmail = $('<td>').text(item.apellido_RH);
+
+          fila.append(columnaID, columnaNombre, columnaEmail);
+          cuerpoTabla.append(fila);
         });
-      })
-      .catch(error => console.log(error));
-      
+      });
+    });
   </script>
 </body>
 </html>
